@@ -27,4 +27,5 @@ private:
 	// Start moving barrel so that a show would hit crosshair
 	// crosshair intersects the world
 	void AimTowardsCrosshair();
+	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
 };
