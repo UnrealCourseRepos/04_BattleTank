@@ -34,7 +34,7 @@ void ATankPlayerController::AimTowardsCrosshair() {
 
 	if (GetSightRayHitLocation(OutHitLocation)) { //has "side-effect", is going to line trace
 		
-		// UE_LOG(LogTemp, Warning, TEXT("Look direction: %s"), *OutHitLocation.ToString());
+		UE_LOG(LogTemp, Warning, TEXT("Hit location: %s"), *OutHitLocation.ToString());
 			
 		// TODO Tell controlled tank to aim at this point
 	}
@@ -51,24 +51,43 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) cons
 	auto ScreenLocation = FVector2D(ViewportSizeX*CrosshairXLocation, ViewportSizeY * CrosshairYLocation);
 
 	// "Deproject" the screen position of the crosshair to world direction
-	FVector WDirection;
-	if (GetLookDirection(ScreenLocation, WDirection)) {
-		UE_LOG(LogTemp, Warning, TEXT("Look direction: %s"), *WDirection.ToString());
+	FVector LookDirection;
+	if (GetLookDirection(ScreenLocation, LookDirection)) {
+		
+		// Line-trace along that look direction and see what we hit (up to max range)
+		GetLookVectorHitLocation(LookDirection,OutHitLocation);
 	}
 	
-	// Line-trace along that look direction and see what we hit (up to max range)
+	
 	return true;
 }
 
-bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& WDirection) const {
+bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const {
 
-	FVector WLocation; // To Be Discarded
+	FVector CameraWorldLocation; // To Be Discarded
 	return DeprojectScreenPositionToWorld(
 		ScreenLocation.X,
 		ScreenLocation.Y,
-		WLocation,
-		WDirection
+		CameraWorldLocation,
+		LookDirection
 	);
 
 	return true;
+}
+
+bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector& OutHitLocation) const {
+	FHitResult HitResult;
+	auto StartLocation = PlayerCameraManager->GetCameraLocation();
+	auto EndLocation = StartLocation + (LookDirection * LineTraceRange);
+	if (GetWorld()->LineTraceSingleByChannel(
+			HitResult,
+			StartLocation,
+			EndLocation,
+			ECollisionChannel::ECC_Visibility)
+		) {
+		OutHitLocation = HitResult.Location;
+		return true;
+	}
+	OutHitLocation = FVector(0.0);
+	return false; // Line trace didn't succeed 
 }
