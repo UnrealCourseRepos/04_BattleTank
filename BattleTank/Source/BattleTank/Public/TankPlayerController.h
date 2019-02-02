@@ -2,10 +2,11 @@
 
 #pragma once
 
-#include "Tank.h"
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h" // Must be last include
+
+class ATank;
 
 /**
  * 
@@ -37,7 +38,7 @@ private:
 	bool GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const;
 	
 	UPROPERTY(EditAnywhere)
-		float LineTraceRange = 1000000;
+		float LineTraceRange = 100000;
 
 	UPROPERTY(EditAnywhere)
 		float CrosshairXLocation = 0.5;
