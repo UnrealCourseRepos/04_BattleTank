@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankAimingComponent.h"
+#include "TankBarrel.h"
 #include "Engine/Classes/Kismet/GameplayStatics.h"
 
 // Sets default values for this component's properties
@@ -13,7 +14,7 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
-void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent * BarrelToSet)
+void UTankAimingComponent::SetBarrelReference(UTankBarrel * BarrelToSet)
 {
 	Barrel = BarrelToSet;
 }
@@ -51,13 +52,10 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
 	auto TankName = GetOwner()->GetName();
 	auto BarrelRotation = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
-	auto DeltaRotator = AimAsRotator; // - BarrelRotator;  // Delete this later when you'll declare this identifier
+	auto DeltaRotator = AimAsRotator /* - BarrelRotator */ ;  // TODO Delete this later when you'll declare this identifier
 
-	UE_LOG(LogTemp, Warning, TEXT("%s AimAsRotator %s"), *TankName , *DeltaRotator.ToString());
-
-
-	// Rotate barrel the right amount this frame
-	// Given a max elevation speed, and frame time
+	
+	Barrel->Elevate(5); // TODO remove magic number
 
 	// so it will point at cordinates of where the player is looking over few frames
 	// Report back the rotation state of the barrel the corditantes of the hit and MAYBE if it hit any enemy tank
