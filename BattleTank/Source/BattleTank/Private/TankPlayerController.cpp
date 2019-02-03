@@ -38,8 +38,7 @@ void ATankPlayerController::AimTowardsCrosshair() {
 		// UE_LOG(LogTemp, Warning, TEXT("Hit location: %s"), *HitLocation.ToString());
 
 		GetControlledTank()->AimAt(HitLocation);
-			
-		// TODO Tell controlled tank to aim at this point
+		
 	}
 	
 }
@@ -89,6 +88,9 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 			ECollisionChannel::ECC_Visibility)
 		) {
 		HitLocation = HitResult.Location;
+		
+		// Change Crosshair color or add addidional crosshair on top if aiming at enemy
+
 		return true;
 	}
 	HitLocation = FVector(0);
