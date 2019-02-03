@@ -60,7 +60,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
 	auto DeltaRotator = AimAsRotator /* - BarrelRotator */ ;  // TODO Delete this later when you'll declare this identifier
 
 	
-	Barrel->Elevate(5); // TODO remove magic number
+	Barrel->Elevate(DeltaRotator.Pitch);
 
 	// so it will point at cordinates of where the player is looking over few frames
 	// Report back the rotation state of the barrel the corditantes of the hit and MAYBE if it hit any enemy tank
