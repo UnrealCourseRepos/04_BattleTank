@@ -79,3 +79,8 @@ DerivedDataCache/*
 # Starter Content
 Content/StarterContent/Textures
 Content/StarterContent/HDRI
+
+# AutomotiveMaterials
+Content/AutomotiveMaterials/Textures
+Content/AutomotiveMaterials/LevelContent/HDRI
+Content/AutomotiveMaterials/LevelContent/PreviewMesh
