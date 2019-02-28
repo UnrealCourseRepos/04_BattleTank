@@ -22,7 +22,7 @@ public:
 
 	// Max force per track, in Newtons
 	UPROPERTY(EditDefaultsOnly)
-	float TrackMaxDrivingForce = 502950; // Assume 40 tonne tank, and 1g acceleration 
+	float TrackMaxDrivingForce = 40000000; // Assume 40 tonne tank, and 1g acceleration 
 										 // TODO find out sensible value https://www.wolframalpha.com/input/?i=0-60mph+in+4+seconds
 
 };
