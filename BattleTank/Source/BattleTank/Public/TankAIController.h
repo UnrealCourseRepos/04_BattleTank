@@ -24,4 +24,9 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+private:
+
+	// How close can AI tank get to the player
+	float AcceptanceRadius = 3000;
+
 };
