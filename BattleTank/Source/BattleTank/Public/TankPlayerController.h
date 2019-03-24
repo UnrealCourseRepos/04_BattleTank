@@ -24,10 +24,10 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-private:
-
+	UFUNCTION(BlueprintCallable, Category = "Setup")
 	ATank* GetControlledTank() const;
-
+private:
+	
 	// Start moving barrel so that a show would hit crosshair
 	// crosshair intersects the world
 	void AimTowardsCrosshair();
