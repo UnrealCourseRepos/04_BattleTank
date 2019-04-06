@@ -12,17 +12,18 @@ UTankAimingComponent::UTankAimingComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false;
 
-	
 }
 
 void UTankAimingComponent::Initialise(UTankTurret * TurretToSet, UTankBarrel * BarrelToSet)
 {
+
 	Turret = TurretToSet;
 	Barrel = BarrelToSet;
 }
 
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
+
 	if (!ensure(Barrel)) { return; }
 
 	FVector OutLaunchVelocity;
@@ -53,15 +54,15 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
-
+	
 	if (!ensure(Barrel && Turret)) { return; }
 
 	// Workout the diffrence between current barrel rotation and Aim Direction
 	auto TankName = GetOwner()->GetName();
-	auto BarrelRotation = Barrel->GetForwardVector().Rotation();
+	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	auto TurretRotator = Turret->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
-	auto DeltaRotator = AimAsRotator - BarrelRotation;
+	auto DeltaRotator = AimAsRotator - BarrelRotator;
 
 	
 	Barrel->Elevate(DeltaRotator.GetNormalized().Pitch);
