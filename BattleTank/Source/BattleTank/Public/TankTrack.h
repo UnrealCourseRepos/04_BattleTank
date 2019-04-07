@@ -25,4 +25,8 @@ public:
 	float TrackMaxDrivingForce = 40000000; // Assume 40 tonne tank, and 1g acceleration 
 										 // TODO find out sensible value https://www.wolframalpha.com/input/?i=0-60mph+in+4+seconds
 
+private:
+	UTankTrack();
+
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 };
