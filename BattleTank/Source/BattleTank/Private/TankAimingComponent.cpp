@@ -23,11 +23,15 @@ void UTankAimingComponent::BeginPlay()
 
 void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction * ThisTickFunction)
 {
-	if ((FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds) {
+	if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds) {
 		FiringStatus = EFiringStatus::Reloading;
 	}
-
-	//TODO Handle Aiming and Locked state
+	else if (IsBarrelMoving()) {
+		FiringStatus = EFiringStatus::Aiming;
+	}
+	else {
+		FiringStatus = EFiringStatus::Locked;
+	}
 }
 
 void UTankAimingComponent::Initialise(UTankTurret * TurretToSet, UTankBarrel * BarrelToSet)
@@ -59,8 +63,10 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
 		false // Debug Line (RayCasting)
 	);
 
+	
+
 	if (bHaveAimSolution) {
-		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
+		AimDirection = OutLaunchVelocity.GetSafeNormal();
 		MoveBarrelTowards(AimDirection);
 		
 	}
@@ -88,6 +94,13 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
 	// Report back the rotation state of the 
 	// the corditantes of the hit and MAYBE if it hit any enemy tank
 
+}
+
+bool UTankAimingComponent::IsBarrelMoving()
+{
+	if (!ensure(Barrel)) { return false; }
+	auto BarrelForward = Barrel->GetForwardVector();
+	return !BarrelForward.Equals(AimDirection, 0.01); //Vectors are equal
 }
 
 void UTankAimingComponent::Fire() {

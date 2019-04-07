@@ -29,6 +29,8 @@ public:
 
 	void AimAt(FVector HitLocation);
 
+	bool IsBarrelMoving();
+
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Initialise(UTankTurret * TurretToSet, UTankBarrel * BarrelToSet);
 
@@ -59,7 +61,9 @@ private:
 	float ReloadTimeInSeconds = 3;
 
 	double LastFireTime = 0;
-	
+
+	FVector AimDirection;
+
 protected:
 
 	// Asking to access this property from a sub class (TankAimingComponent in this case the parent is the C++ class)
