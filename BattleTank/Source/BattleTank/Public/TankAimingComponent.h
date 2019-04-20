@@ -37,6 +37,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void Fire();
 
+	EFiringStatus GetFiringStatus() const;
+
 private:
 
 	virtual void BeginPlay() override;
