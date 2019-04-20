@@ -25,13 +25,11 @@ void ATankPlayerController::AimTowardsCrosshair() {
 	if (!ensure(AimingComponent)) { return; }
 
 	FVector HitLocation; // Out Parameter
-
+	bool bGotHitLocation = GetSightRayHitLocation(HitLocation);
 	if (GetSightRayHitLocation(HitLocation)) { //has "side-effect", is going to line trace
-		
-		// UE_LOG(LogTemp, Warning, TEXT("Hit location: %s"), *HitLocation.ToString());
 
 		AimingComponent->AimAt(HitLocation);
-		
+
 	}
 	
 }
@@ -50,11 +48,10 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const {
 	if (GetLookDirection(ScreenLocation, LookDirection)) {
 		
 		// Line-trace along that look direction and see what we hit (up to max range)
-		GetLookVectorHitLocation(LookDirection,HitLocation);
+		return GetLookVectorHitLocation(LookDirection,HitLocation);
 	}
 	
-	
-	return true;
+	return false;
 }
 
 bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const {

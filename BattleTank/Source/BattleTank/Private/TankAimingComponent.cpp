@@ -86,9 +86,15 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
 
-	
+	// Always yaw the shortest way
 	Barrel->Elevate(DeltaRotator.GetNormalized().Pitch);
-	Turret->Rotate(DeltaRotator.GetNormalized().Yaw);
+	if (DeltaRotator.Yaw > 180) {
+		Turret->Rotate(-DeltaRotator.GetNormalized().Yaw);
+	}
+	else {
+		Turret->Rotate(DeltaRotator.GetNormalized().Yaw);
+	}
+	
 
 	// so it will point at cordinates of where the player is looking over few frames
 	// Report back the rotation state of the 
