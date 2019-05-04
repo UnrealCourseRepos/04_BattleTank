@@ -11,7 +11,8 @@ UENUM()
 enum class EFiringStatus : uint8 {
 	Reloading,
 	Aiming,
-	Locked
+	Locked,
+	OutOfAmmo
 };
 
 // Forward declaration
@@ -39,6 +40,9 @@ public:
 
 	EFiringStatus GetFiringStatus() const;
 
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	int GetAmmoLeft() const;
+
 private:
 
 	virtual void BeginPlay() override;
@@ -52,7 +56,7 @@ private:
 	UTankTurret* Turret = nullptr;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float LaunchSpeed = 4000;
+	float LaunchSpeed = 8000;
 	
 	void MoveBarrelTowards(FVector AimDirection);
 
@@ -64,11 +68,15 @@ private:
 
 	double LastFireTime = 0;
 
+	int Ammo = 3;
+
 	FVector AimDirection;
+
 
 protected:
 
 	// Asking to access this property from a sub class (TankAimingComponent in this case the parent is the C++ class)
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 	EFiringStatus FiringStatus = EFiringStatus::Reloading;
+
 };
