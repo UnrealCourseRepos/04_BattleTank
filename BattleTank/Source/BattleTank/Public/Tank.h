@@ -17,6 +17,18 @@ class BATTLETANK_API ATank : public APawn
 public:
 	
 	//...
+	
+	UFUNCTION(BlueprintCallable, Category = "Health")
+	float GetHealth();
+
+	UFUNCTION(BlueprintCallable, Category = "Health")
+	float GetDamaged(float Damage);
+
+	UFUNCTION(BlueprintCallable, Category = "Health")
+	float GetDefaultHealth();
+
+	virtual void Tick(float DeltaTime) override;
+
 
 protected:
 	// Called when the game starts or when spawned
@@ -25,5 +37,9 @@ protected:
 private:
 	// Sets default values for this pawn's properties
 	ATank();
-	
+
+	UPROPERTY(EditDefaultsOnly, Category = "Health")
+	float DefaultHealth = 3000;
+
+	float Health;
 };
