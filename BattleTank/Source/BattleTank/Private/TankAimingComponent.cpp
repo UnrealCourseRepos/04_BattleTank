@@ -48,6 +48,11 @@ int UTankAimingComponent::GetAmmoLeft() const
 	return Ammo;
 }
 
+int UTankAimingComponent::GetAmmoAtBeginPlay() const
+{
+	return AmmoAtBeginPlay;
+}
+
 void UTankAimingComponent::Initialise(UTankTurret * TurretToSet, UTankBarrel * BarrelToSet)
 {
 

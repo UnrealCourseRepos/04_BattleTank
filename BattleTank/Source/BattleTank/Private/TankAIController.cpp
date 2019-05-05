@@ -31,8 +31,5 @@ void ATankAIController::Tick(float DeltaTime) {
 			AimingComponent->Fire(); // TODO limit firing rate
 		}
 	}
-	else {
-		UE_LOG(LogTemp, Warning, TEXT("AI is out of ammo finish him"))
-	}
 }
 

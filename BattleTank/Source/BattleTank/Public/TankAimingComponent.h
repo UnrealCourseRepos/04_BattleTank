@@ -43,6 +43,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	int GetAmmoLeft() const;
 
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	int GetAmmoAtBeginPlay() const;
+
+
 private:
 
 	virtual void BeginPlay() override;
@@ -56,7 +60,7 @@ private:
 	UTankTurret* Turret = nullptr;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float LaunchSpeed = 8000;
+	float LaunchSpeed = 4000;
 	
 	void MoveBarrelTowards(FVector AimDirection);
 
@@ -68,7 +72,10 @@ private:
 
 	double LastFireTime = 0;
 
-	int Ammo = 3;
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	int Ammo = 15;
+
+	const int AmmoAtBeginPlay = Ammo;
 
 	FVector AimDirection;
 

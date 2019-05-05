@@ -29,10 +29,10 @@ void ATank::Tick(float DeltaTime) {
 	Super::Tick(DeltaTime);
 	
 	if (Health <= 0) {
+
 		UE_LOG(LogTemp, Warning, TEXT("Destroyed"))
 		GetController()->GetPawn()->UnPossessed();
 		Destroy();
-		//TODO Create You Died widget in C++
 	}
 
 }
