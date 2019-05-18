@@ -87,7 +87,6 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
 	if (bHaveAimSolution) {
 		AimDirection = OutLaunchVelocity.GetSafeNormal();
 		MoveBarrelTowards(AimDirection);
-		
 	}
 	
 	// No aim solution found
@@ -107,10 +106,10 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
 
 	// Always yaw the shortest way
 	Barrel->Elevate(DeltaRotator.GetNormalized().Pitch);
-	if (DeltaRotator.GetNormalized().Yaw > 180) {
+	if (FMath::Abs(DeltaRotator.GetNormalized().Yaw) > 180) {
 		Turret->Rotate(-DeltaRotator.GetNormalized().Yaw);
 	}
-	else {
+	else { // Avoid going the long way
 		Turret->Rotate(DeltaRotator.GetNormalized().Yaw);
 	}
 	
