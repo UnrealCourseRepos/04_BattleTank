@@ -41,10 +41,10 @@ public:
 	EFiringStatus GetFiringStatus() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
-	int GetAmmoLeft() const;
+	int32 GetAmmoLeft() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
-	int GetAmmoAtBeginPlay() const;
+	int32 GetAmmoAtBeginPlay() const;
 
 
 private:
@@ -73,9 +73,9 @@ private:
 	double LastFireTime = 0;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	int Ammo = 15;
+	int32 Ammo = 15;
 
-	const int AmmoAtBeginPlay = Ammo;
+	const int32 AmmoAtBeginPlay = Ammo;
 
 	FVector AimDirection;
 

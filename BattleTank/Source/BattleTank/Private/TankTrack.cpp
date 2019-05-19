@@ -1,10 +1,13 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Martin Szabo
 
 #include "TankTrack.h"
 #include "BattleTank.h"
 
 UTankTrack::UTankTrack() {
 	PrimaryComponentTick.bCanEverTick = false;
+
+	
+	this->SetNotifyRigidBodyCollision(true);
 }
 
 void UTankTrack::BeginPlay() {
