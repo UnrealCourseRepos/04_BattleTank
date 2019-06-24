@@ -98,7 +98,6 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
 	if (!ensure(Barrel && Turret)) { return; }
 
 	// Workout the diffrence between current barrel rotation and Aim Direction
-	auto TankName = GetOwner()->GetName();
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	auto TurretRotator = Turret->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();

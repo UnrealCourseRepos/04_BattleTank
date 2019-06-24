@@ -21,9 +21,9 @@ public:
 	void SetThrottle(float Throttle);
 
 	// Max force per track, in Newtons
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "Movement")
 	float TrackMaxDrivingForce = 60000000; // Assume 40 tonne tank, and 1g acceleration 
-										 // TODO find out sensible value https://www.wolframalpha.com/input/?i=0-60mph+in+4+seconds
+										   // TODO find out sensible value https://www.wolframalpha.com/input/?i=0-60mph+in+4+seconds
 
 private:
 	UTankTrack();
