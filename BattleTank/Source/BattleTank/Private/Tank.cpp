@@ -1,12 +1,15 @@
 // Copyright Martin Szabo
 
 #include "Tank.h"
+#include "Runtime/Engine/Classes/Particles/ParticleSystemComponent.h"
 
 // Sets default values
 ATank::ATank()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	// TODO Add explosion blast to tank
 
 }
 
@@ -19,6 +22,11 @@ void ATank::BeginPlay()
 		Health = DefaultHealth;
 	}
 }
+
+/*void ATank::Destroyed()
+{
+	ExplosionBlast->Activate(); // TODO Add explosion blast to tank
+}*/
 
 float ATank::GetDefaultHealth()
 {
