@@ -22,9 +22,6 @@ public:
 	float GetHealth();
 
 	UFUNCTION(BlueprintCallable, Category = "Health")
-	float GetDamaged(float Damage);
-
-	UFUNCTION(BlueprintCallable, Category = "Health")
 	float GetDefaultHealth();
 
 	virtual void Tick(float DeltaTime) override;
@@ -43,8 +40,12 @@ private:
 	/*UPROPERTY(VisibleAnywhere, Category = "Components", meta=(AllowPrivateAccess = "true"))
 	UParticleSystemComponent * ExplosionBlast = nullptr;*/
 
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEvent, class AController * EventInstigator, AActor * DamageCauser) override;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Health")
 	float DefaultHealth = 3000;
+
+	float DamageToApply;
 
 	float Health;
 };

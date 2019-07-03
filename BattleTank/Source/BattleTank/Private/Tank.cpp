@@ -13,6 +13,30 @@ ATank::ATank()
 
 }
 
+float ATank::TakeDamage(float DamageAmount, FDamageEvent const & DamageEvent, AController * EventInstigator, AActor * DamageCauser)
+{
+	/* This function is second part of projectiles apply radial damage and gets
+	called by it with: Projectile Damage Value, Projectile Location, Explosion Radius*/
+
+	// Clamp the value between 0 and current health of the tank so we wont get negative health
+	float DamageToApply = FMath::Clamp(DamageAmount, 0.f, Health);
+
+	Health -= DamageToApply; // Tank gets damaged
+
+	// If Health equals 0 tank is destroyed
+	if (Health <= 0) {
+
+		UE_LOG(LogTemp, Warning, TEXT("Destroyed"))
+		GetController()->GetPawn()->UnPossessed();
+		Destroy();
+	}
+
+	return DamageToApply;
+	
+}
+
+
+
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
 {
@@ -35,23 +59,9 @@ float ATank::GetDefaultHealth()
 
 void ATank::Tick(float DeltaTime) {
 	Super::Tick(DeltaTime);
-	
-	if (Health <= 0) {
-
-		UE_LOG(LogTemp, Warning, TEXT("Destroyed"))
-		GetController()->GetPawn()->UnPossessed();
-		Destroy();
-	}
 
 }
 
 float ATank::GetHealth() {
 	return Health;
 }
-
-float ATank::GetDamaged(float Damage) {
-
-	Health = Health - Damage;
-	return Health;
-}
-
