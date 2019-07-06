@@ -19,12 +19,13 @@ float ATank::TakeDamage(float DamageAmount, FDamageEvent const & DamageEvent, AC
 	called by it with: Projectile Damage Value, Projectile Location, Explosion Radius*/
 
 	// Clamp the value between 0 and current health of the tank so we wont get negative health
-	float DamageToApply = FMath::Clamp(DamageAmount, 0.f, Health);
+	int32 DamagePoints = FPlatformMath::RoundToInt(DamageAmount);
+	int32 DamageToApply = FMath::Clamp(DamagePoints, 0, CurrentHealth);
 
-	Health -= DamageToApply; // Tank gets damaged
-
+	CurrentHealth -= DamageToApply; // Tank gets damaged
+	
 	// If Health equals 0 tank is destroyed
-	if (Health <= 0) {
+	if (CurrentHealth <= 0) {
 
 		UE_LOG(LogTemp, Warning, TEXT("Destroyed"))
 		GetController()->GetPawn()->UnPossessed();
@@ -42,8 +43,8 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay(); // Needed for BL BeginPlay() to run
 
-	if (Health <= 0) {
-		Health = DefaultHealth;
+	if (CurrentHealth <= 0) {
+		CurrentHealth = StartingHealth;
 	}
 }
 
@@ -52,16 +53,11 @@ void ATank::BeginPlay()
 	ExplosionBlast->Activate(); // TODO Add explosion blast to tank
 }*/
 
-float ATank::GetDefaultHealth()
-{
-	return DefaultHealth;
-}
-
 void ATank::Tick(float DeltaTime) {
 	Super::Tick(DeltaTime);
 
 }
 
-float ATank::GetHealth() {
-	return Health;
+float ATank::GetHealthPercentage() {
+	return (float)CurrentHealth / (float)StartingHealth;
 }

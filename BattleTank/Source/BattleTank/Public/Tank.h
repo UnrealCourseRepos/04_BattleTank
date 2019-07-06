@@ -18,11 +18,8 @@ public:
 	
 	//...
 	
-	UFUNCTION(BlueprintCallable, Category = "Health")
-	float GetHealth();
-
-	UFUNCTION(BlueprintCallable, Category = "Health")
-	float GetDefaultHealth();
+	UFUNCTION(BlueprintPure, Category = "Health")
+	float GetHealthPercentage();
 
 	virtual void Tick(float DeltaTime) override;
 
@@ -43,9 +40,9 @@ private:
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEvent, class AController * EventInstigator, AActor * DamageCauser) override;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Health")
-	float DefaultHealth = 3000;
+	int32 StartingHealth = 3000;
 
-	float DamageToApply;
+	int32 DamageToApply;
 
-	float Health;
+	int32 CurrentHealth;
 };
