@@ -22,7 +22,7 @@ void ATankAIController::Tick(float DeltaTime) {
 	if (AimingComponent->GetAmmoLeft() > 0) { // TODO Find better way to handle AI tank running out of ammo
 
 		// Move towards the player
-		MoveToActor(PlayerTank, AcceptanceRadius);
+		MoveToActor(PlayerTank, AcceptanceRadius); // TODO Fix tank wont shoot or move away and shoot when player gets to close
 
 		// Aim towards player
 		AimingComponent->AimAt(PlayerTank->GetActorLocation());

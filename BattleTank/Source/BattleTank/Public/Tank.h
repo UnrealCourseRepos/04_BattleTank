@@ -17,7 +17,9 @@ class BATTLETANK_API ATank : public APawn
 public:
 	
 	//...
-	
+
+	// TODO make health bar widget turn red at 25% or less only for the that has 25% or less health (Inside HealthBar blueprint in Get_ProgressBar_FillAndOpacity)
+
 	UFUNCTION(BlueprintPure, Category = "Health")
 	float GetHealthPercentage();
 
