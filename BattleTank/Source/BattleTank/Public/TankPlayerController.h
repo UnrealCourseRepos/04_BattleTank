@@ -46,4 +46,9 @@ private:
 	
 	UPROPERTY(EditDefaultsOnly)
 		float CrosshairYLocation = 0.33333;
+
+	virtual void SetPawn(APawn * InPawn) override;
+
+	UFUNCTION()
+	void OnPossesedTankDeath();
 };

@@ -4,10 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "Delegate.h"
 #include "Tank.generated.h"
 
-// Forward declarations
-
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTankDelegate);
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -24,6 +24,8 @@ public:
 	float GetHealthPercentage();
 
 	virtual void Tick(float DeltaTime) override;
+
+	FTankDelegate OnDeath;
 
 protected:
 	// Called when the game starts or when spawned

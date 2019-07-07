@@ -1,13 +1,17 @@
 // Copyright Martin Szabo
 
 #include "Tank.h"
+#include "Delegate.h"
 #include "Runtime/Engine/Classes/Particles/ParticleSystemComponent.h"
+
 
 // Sets default values
 ATank::ATank()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	
 
 	// TODO Add explosion blast to tank
 
@@ -26,10 +30,7 @@ float ATank::TakeDamage(float DamageAmount, FDamageEvent const & DamageEvent, AC
 	
 	// If Health equals 0 tank is destroyed
 	if (CurrentHealth <= 0) {
-
-		UE_LOG(LogTemp, Warning, TEXT("Destroyed"))
-		GetController()->GetPawn()->UnPossessed();
-		Destroy();
+		OnDeath.Broadcast();
 	}
 
 	return DamageToApply;
