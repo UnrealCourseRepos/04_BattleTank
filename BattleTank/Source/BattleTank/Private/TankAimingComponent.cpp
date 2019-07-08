@@ -35,6 +35,8 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 	else {
 		FiringStatus = EFiringStatus::Locked;
 	}
+
+
 	
 }
 
@@ -53,11 +55,12 @@ int32 UTankAimingComponent::GetAmmoAtBeginPlay() const
 	return AmmoAtBeginPlay;
 }
 
-void UTankAimingComponent::Initialise(UTankTurret * TurretToSet, UTankBarrel * BarrelToSet)
+void UTankAimingComponent::Initialise(UTankTurret * TurretToSet, UTankBarrel * BarrelToSet, UClass * ProjectileBlueprintToSet)
 {
 
 	Turret = TurretToSet;
 	Barrel = BarrelToSet;
+	ProjectileBlueprint = ProjectileBlueprintToSet;
 }
 
 void UTankAimingComponent::AimAt(FVector HitLocation)

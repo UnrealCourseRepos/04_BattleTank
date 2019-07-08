@@ -33,7 +33,7 @@ public:
 	bool IsBarrelMoving();
 
 	UFUNCTION(BlueprintCallable, Category = "Setup")
-	void Initialise(UTankTurret * TurretToSet, UTankBarrel * BarrelToSet);
+	void Initialise(UTankTurret * TurretToSet, UTankBarrel * BarrelToSet, UClass * ProjectileBlueprintToSet);
 
 	UFUNCTION(BlueprintCallable)
 	void Fire();

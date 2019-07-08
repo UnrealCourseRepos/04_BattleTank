@@ -15,7 +15,10 @@ void ATankPlayerController::BeginPlay() {
 
 void ATankPlayerController::Tick(float DeltaTime) {
 	Super::Tick(DeltaTime);
-
+	
+	if (!ensure(GetPawn())) { return; }
+	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+	if (!ensure(AimingComponent)) { return; }
 	AimTowardsCrosshair();
 }
 
@@ -103,4 +106,9 @@ void ATankPlayerController::SetPawn(APawn * InPawn)
 void ATankPlayerController::OnPossesedTankDeath()
 {
 	UE_LOG(LogTemp, Warning, TEXT("CAT: Player Controller - Recived"));
+	
+	auto PossesedTank = Cast<ATank>(GetPawn());
+	PossesedTank->DetachFromControllerPendingDestroy();
+	StartSpectatingOnly();
+	PossesedTank->Destroy();
 }
