@@ -23,6 +23,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	float AcceptanceRadius = 8000;
 
+	UFUNCTION()
+	void OnPossesedTankDeath();
+
 private:
 
 	// Called when the game starts or when spawned
@@ -30,9 +33,6 @@ private:
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	UFUNCTION()
-	void OnPossesedTankDeath();
 
 	virtual void SetPawn(APawn* InPawn) override;
 };

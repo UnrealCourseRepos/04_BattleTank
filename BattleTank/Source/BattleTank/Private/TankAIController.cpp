@@ -47,10 +47,6 @@ void ATankAIController::SetPawn(APawn * InPawn) {
 }
 
 void ATankAIController::OnPossesedTankDeath() {
-	UE_LOG(LogTemp, Warning, TEXT("CAT: AI Controller - Recived"));
-	auto PossesedTank = Cast<ATank>(GetPawn());
-	PossesedTank->DetachFromControllerPendingDestroy();
-	PossesedTank->Destroy();
-
+	GetPawn()->DetachFromControllerPendingDestroy();
 }
 

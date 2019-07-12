@@ -30,6 +30,9 @@ float ATank::TakeDamage(float DamageAmount, FDamageEvent const & DamageEvent, AC
 	// If Health equals 0 tank is destroyed
 	if (CurrentHealth <= 0) {
 		OnDeath.Broadcast();
+		if (!this) { return DamageToApply; }
+		// TODO Add explosion blast trigger to tank here
+		this->Destroy();
 	}
 
 	return DamageToApply;

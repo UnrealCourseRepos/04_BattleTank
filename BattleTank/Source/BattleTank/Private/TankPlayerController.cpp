@@ -103,12 +103,6 @@ void ATankPlayerController::SetPawn(APawn * InPawn)
 	}
 }
 
-void ATankPlayerController::OnPossesedTankDeath()
-{
-	UE_LOG(LogTemp, Warning, TEXT("CAT: Player Controller - Recived"));
-	
-	auto PossesedTank = Cast<ATank>(GetPawn());
-	PossesedTank->DetachFromControllerPendingDestroy();
+void ATankPlayerController::OnPossesedTankDeath() {
 	StartSpectatingOnly();
-	PossesedTank->Destroy();
 }

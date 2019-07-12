@@ -27,6 +27,10 @@ protected:
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 	void FoundAimingComponent(UTankAimingComponent* AimingCompRef);
+
+	UFUNCTION()
+	void OnPossesedTankDeath();
+
 private:
 	
 	// Start moving barrel so that a show would hit crosshair
@@ -49,6 +53,4 @@ private:
 
 	virtual void SetPawn(APawn * InPawn) override;
 
-	UFUNCTION()
-	void OnPossesedTankDeath();
 };
