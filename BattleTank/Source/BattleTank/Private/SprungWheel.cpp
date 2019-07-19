@@ -29,7 +29,7 @@ void ASprungWheel::BeginPlay()
 	Super::BeginPlay();
 
 	if (GetAttachParentActor()) {
-		UE_LOG(LogTemp, Warning, TEXT("CAT: Not null"))
+		UE_LOG(LogTemp, Warning, TEXT("CAT: Not null: %s"), *GetAttachParentActor()->GetName())
 	}
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("CAT: null"))

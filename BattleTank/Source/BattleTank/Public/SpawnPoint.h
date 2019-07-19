@@ -20,7 +20,7 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	/*UFUNCTION(BlueprintCallable, Category = "Setup")  // TODO Figure out when to call this
-	/ void Initialise (UClass* SpawnClassToSet);*/
+	void Initialise (UClass* SpawnClassToSet);*/
 
 protected:
 	// Called when the game starts
