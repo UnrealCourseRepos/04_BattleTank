@@ -18,22 +18,21 @@ ASprungWheel::ASprungWheel()
 	Wheel = CreateDefaultSubobject<UStaticMeshComponent>(FName("Wheel"));
 	Wheel->SetupAttachment(Spring);
 
-	Mass = CreateDefaultSubobject<UStaticMeshComponent>(FName("Mass"));
-	Mass->SetupAttachment(Spring);
-
 }
 
 // Called when the game starts or when spawned
 void ASprungWheel::BeginPlay()
 {
 	Super::BeginPlay();
+	SetupConstrain();
+}
 
-	if (GetAttachParentActor()) {
-		UE_LOG(LogTemp, Warning, TEXT("CAT: Not null: %s"), *GetAttachParentActor()->GetName())
-	}
-	else {
-		UE_LOG(LogTemp, Warning, TEXT("CAT: null"))
-	}
+void ASprungWheel::SetupConstrain() {
+
+	if (!GetAttachParentActor()) { return; }
+	UPrimitiveComponent* BodyRoot = Cast<UPrimitiveComponent>(GetAttachParentActor()->GetRootComponent());
+	if (!BodyRoot) { return; }
+	Spring->SetConstrainedComponents(BodyRoot, NAME_None, Wheel, NAME_None);
 }
 
 // Called every frame
@@ -42,4 +41,3 @@ void ASprungWheel::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
-
