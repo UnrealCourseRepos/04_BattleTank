@@ -3,6 +3,7 @@
 
 #include "SprungWheel.h"
 #include "PhysicsEngine/PhysicsConstraintComponent.h"
+#include "Runtime/Engine/Classes/Components/SphereComponent.h"
 
 
 // Sets default values
@@ -15,8 +16,14 @@ ASprungWheel::ASprungWheel()
 	Spring = CreateDefaultSubobject<UPhysicsConstraintComponent>(FName("Spring"));
 	SetRootComponent(Spring);
 
-	Wheel = CreateDefaultSubobject<UStaticMeshComponent>(FName("Wheel"));
-	Wheel->SetupAttachment(Spring);
+	Axle = CreateDefaultSubobject<USphereComponent>(FName("Axle"));
+	Axle->SetupAttachment(Spring);
+
+	Wheel = CreateDefaultSubobject<USphereComponent>(FName("Wheel"));
+	Wheel->SetupAttachment(Axle);
+
+	AxleWheelConstraint = CreateDefaultSubobject<UPhysicsConstraintComponent>(FName("AxleWheelConstraint"));
+	AxleWheelConstraint->SetupAttachment(Axle);
 
 }
 
@@ -32,7 +39,9 @@ void ASprungWheel::SetupConstrain() {
 	if (!GetAttachParentActor()) { return; }
 	UPrimitiveComponent* BodyRoot = Cast<UPrimitiveComponent>(GetAttachParentActor()->GetRootComponent());
 	if (!BodyRoot) { return; }
-	Spring->SetConstrainedComponents(BodyRoot, NAME_None, Wheel, NAME_None);
+
+	Spring->SetConstrainedComponents(BodyRoot, NAME_None, Axle, NAME_None);
+	AxleWheelConstraint->SetConstrainedComponents(Axle, NAME_None, Wheel, NAME_None);
 }
 
 // Called every frame
