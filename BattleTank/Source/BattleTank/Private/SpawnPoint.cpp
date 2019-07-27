@@ -16,20 +16,25 @@ USpawnPoint::USpawnPoint()
 }
 
 
+AActor* USpawnPoint::GetSpawnedActor()
+{
+	return SpawnedActor;
+}
+
 // Called when the game starts
 void USpawnPoint::BeginPlay()
 {
 	Super::BeginPlay();
 
-	auto NewActor = GetWorld()->SpawnActorDeferred<AActor>(SpawnClass,GetComponentTransform());
+	AActor* SpawnedActor = GetWorld()->SpawnActorDeferred<AActor>(SpawnClass,GetComponentTransform());
 
-	if (!NewActor) {
-		UE_LOG(LogTemp, Warning, TEXT("CAT: NewActor Not Spawned"));
+	if (!SpawnedActor) {
+		UE_LOG(LogTemp, Warning, TEXT("CAT: Actor Not Spawned"));
 		return;
 	}
 
-	NewActor->AttachToComponent(this, FAttachmentTransformRules::KeepWorldTransform);
-	UGameplayStatics::FinishSpawningActor(NewActor, GetComponentTransform());
+	SpawnedActor->AttachToComponent(this, FAttachmentTransformRules::KeepWorldTransform);
+	UGameplayStatics::FinishSpawningActor(SpawnedActor, GetComponentTransform());
 }
 
 

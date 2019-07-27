@@ -22,6 +22,8 @@ public:
 	/*UFUNCTION(BlueprintCallable, Category = "Setup")  // TODO Figure out when to call this
 	void Initialise (UClass* SpawnClassToSet);*/
 
+	AActor* GetSpawnedActor();
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -30,4 +32,6 @@ private:
 	// Config
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	TSubclassOf<AActor> SpawnClass;
+
+	AActor* SpawnedActor;
 };
