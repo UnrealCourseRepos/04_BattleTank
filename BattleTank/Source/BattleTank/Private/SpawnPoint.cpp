@@ -26,7 +26,7 @@ void USpawnPoint::BeginPlay()
 {
 	Super::BeginPlay();
 
-	AActor* SpawnedActor = GetWorld()->SpawnActorDeferred<AActor>(SpawnClass,GetComponentTransform());
+	SpawnedActor = GetWorld()->SpawnActorDeferred<AActor>(SpawnClass,GetComponentTransform());
 
 	if (!SpawnedActor) {
 		UE_LOG(LogTemp, Warning, TEXT("CAT: Actor Not Spawned"));
