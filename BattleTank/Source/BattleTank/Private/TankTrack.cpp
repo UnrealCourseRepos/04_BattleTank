@@ -11,9 +11,9 @@ UTankTrack::UTankTrack() {
 	//this->SetNotifyRigidBodyCollision(true);
 }
 
-TArray<class ASprungWheel*> UTankTrack::GetWheels() const
+TArray<ASprungWheel*> UTankTrack::GetWheels() const
 {
-	TArray<class ASprungWheel*> ResultArray;
+	TArray<ASprungWheel*> ResultArray;
 	TArray<USceneComponent*> Children;
 	GetChildrenComponents(true, Children);
 	for (USceneComponent* Child : Children) {
